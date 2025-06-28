@@ -1,0 +1,105 @@
+-------------------------------------------------April 20 K8s----------------------------------------------------
+
+What is kubernetes ?
+
+* It is a tool for orchestration.
+* Autoscaling,loadbalancing,Autohealing. is al
+* It is open source but in orfder to setup K8 the cost is quite high
+* KUBERNETES is also known as K8.
+
+Assignment -1 
+Master node ->
+    1  clear
+    2  sudo apt update
+    3  sudo apt list --upgradable
+    4  sudo nano k.sh
+    5  clear
+    6  bash k.sh
+    7  sudo nano c.sh
+    8  bash c.sh
+    9  kubectl get nodes
+   10  sudo nano k8.yaml
+   11  kubectl apply -f k8.yaml
+   12  kubectl get deploy
+   13  kubectl get pods
+   14  kubectl get pods -o wide
+   15  history
+
+
+Slave-1/worker-1
+
+    1  clear
+    2  sudo apt update
+    3  sudo nano a.sh
+    4  bash a.sh
+    5  sudo kubeadm reset pre-flight checks
+    6  sudo su
+
+
+Slave-2/worker
+    1  clear
+    2  sudo apt update
+    3  sudo nano b.sh
+    4  bash b.sh
+    5  sudo kubeadm reset pre-flight checks
+    6  sudo su
+    7  history
+
+Assignment-2-------------------------------------------------------------------------------------------
+
+assignment-2 play.yaml-->
+
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx-service
+spec:
+  selector:
+    app: nginx
+  type: NodePort
+  ports:
+    - port: 80
+      targetPort: 80
+      nodePort: 30080
+
+Master node
+
+   18  sudo nano play.yaml
+   19  kubectl apply -f play.yaml
+   25  kubectl get deploy
+   26  kubectl get svc
+   27  history
+
+ After this just copy public Ip of master and try to access it port you have allocated in play.yaml
+
+
+
+Assignment -3 -----------------------------------------------------------------------------------------
+
+   28  kubectl get deploy
+   29  kubectl edit deploy
+   30  kubectl get deploy
+   31  kubectl get pods
+   32  kubectl get pods -o wide
+   33  history
+
+Assignment-4 --------------------------------------------------------------------------------------------
+
+   35  kubectl edit svc
+   36  kubectl get svc
+   37  history
+
+Assignment -5-------------------------------------------------------------------------------------------------
+
+ 1  clear
+    2  sudo apt update
+    3  sudo nano m.sh
+    4  bash m.sh
+    5  sudo nano minikube.yaml
+    6  kubectl create deployment nginx --image=nginx --port=80
+    7  kubectl expose deploy nginx --type NodePort
+    8  kubectl apply -f minikube.yaml
+   13  kubectl port-forward -h
+   14  kubectl port-forward service/ingress-nginx-controller -n ingress-nginx --address 0.0.0.0 :443
+   15  sudo cat minikube.yaml
+   16  history
