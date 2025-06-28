@@ -7,7 +7,7 @@ pipeline {
         stage('compile') {
 	   steps {
                 echo 'compiling..'
-		git url: 'https://github.com/puneetgavri/DevopsProjectSampleJavaApp.git'
+		git url: 'https://github.com/ljawahar4/test.git'
 		sh script: '/opt/maven/bin/mvn compile'
            }
         }
@@ -52,7 +52,7 @@ pipeline {
         }
         stage("Build Docker Image") {
             steps{
-               sh "docker build -t puneetgavri/sampleappimage:latest ."
+               sh "docker build -t ljawahar4/sample:latest ."
             }
         }
 
@@ -60,7 +60,7 @@ pipeline {
             steps {
                 script {
                     // Run Trivy to scan the Docker image
-                    def trivyOutput = sh(script: "trivy image puneetgavri/sampleappimage:latest", returnStdout: true).trim()
+                    def trivyOutput = sh(script: "trivy image ljawahar4/sample:latest:latest", returnStdout: true).trim()
 
                     // Display Trivy scan results
                     println trivyOutput
@@ -81,7 +81,7 @@ pipeline {
         stage("Docker Push"){
             steps{
             sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
-            sh "docker push puneetgavri/sampleappimage:latest"
+            sh "docker push ljawahar4/sample:latest"
             }
         }
     }
